@@ -1,0 +1,27 @@
+<div class="side-nav-content" >
+    <ul class="nav-list" [ngClass]="{'nav-list-open': sideNavStatus }">
+        <li class="nav-list-item">
+            <button mat-icon-button color="accent" aria-label="Example icon button with a home icon">
+                <mat-icon>home</mat-icon>
+              </button>
+            <span>
+                <a class="links" routerLink="/">Home</a>
+            </span>
+        </li>
+        <!-- <br> -->
+        <li class="nav-list-item">
+            <button mat-icon-button color="accent" aria-label="Example icon button with a home icon">
+                <mat-icon>book</mat-icon>
+              </button>
+            <span>
+                <a class="links" routerLink="/subject">Subjects</a>
+            </span>
+        </li>
+        <!-- <li class="nav-list-item" *ngFor="let item of list">
+            <span>
+                <a routerLink="/subject">{{item.name}}</a>
+            </span>
+        </li> -->
+        
+    </ul>
+</div>
