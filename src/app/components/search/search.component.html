@@ -1,0 +1,75 @@
+<mat-form-field class="titleField">
+  <mat-label>Book Name</mat-label>
+  <input [(ngModel)]="title" matInput placeholder="Ex. Javascript" autocomplete="off">
+  <button mat-button matSuffix (click)="clearTitle()" *ngIf="title">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+
+<mat-form-field class="authorField">
+  <mat-label>Author Name</mat-label>
+  <input [(ngModel)]="authorName" matInput placeholder="Ex. Paul Wilton" autocomplete="off">
+  <button mat-button matSuffix (click)="clearAuthorName()" *ngIf="authorName">
+    <mat-icon>close</mat-icon>
+  </button>
+</mat-form-field>
+<br>
+
+<button mat-raised-button color="accent" (click)="getBook(title, authorName)">Search</button>
+<br><br>
+
+<p *ngIf="searching == 2 && (title.length >= 2 && authorName.length >= 2)">
+  {{bookOutput}} Search Results For: {{title}} and {{authorName}}
+</p>
+<p *ngIf="searching == 2 && (title.length >= 2 && authorName.length == 0)">
+  {{bookOutput}} Search Results For: {{title}}
+</p>
+<p *ngIf="searching == 2 && (title.length == 0 && authorName.length >= 2)">
+  {{bookOutput}} Search Results For: {{authorName}}
+</p>
+
+
+<!-- <div *ngIf="searchField">
+  <app-table [searchField]='searchField' (bookFetched) = "bookFetched($event)"></app-table>
+
+</div> -->
+<div class="spinner" *ngIf="(title || authorName) && searching == 1">
+  <mat-spinner></mat-spinner>
+</div>
+
+<table class="table table-striped" *ngIf="searching == 2">
+  <thead>
+    <tr>
+      <th scope="col">Title</th>
+      <th scope="col">Author</th>
+      <th scope="col">Latest Publish Year</th>
+      <th scope="col">First Publish Year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize">
+      <td>
+        {{ book.title }}
+      </td>
+      <td>{{ book.author_name[0] }}</td>
+      <td>{{ book.publish_year[0] }}</td>
+      <td>{{book.first_publish_year }}</td>
+    </tr>
+  </tbody>
+
+</table>
+
+  <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput" [(page)]="page" [boundaryLinks]="true">
+    <ng-template ngbPaginationPages let-page let-pages="pages">
+      <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
+        <div class="mb-1 d-flex flex-nowrap px-2">
+          <label id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
+          <input #i type="text" inputmode="numeric" pattern="[0-9]*" class="form-control custom-pages-input"
+            id="paginationInput" [value]="page" (keyup.enter)="selectPage(i.value)" (blur)="selectPage(i.value)"
+            (input)="formatInput($any($event).target)" aria-labelledby="paginationInputLabel paginationDescription"
+            style="width: 3rem" />
+          <span id="paginationDescription" class="col-form-label text-nowrap px-2"> of {{pages.length}}</span>
+        </div>
+      </li>
+    </ng-template>
+  </ngb-pagination>

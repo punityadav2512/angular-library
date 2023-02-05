@@ -1,0 +1,46 @@
+
+
+  .toolbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    background-color: #1976d2;
+    color: white;
+    font-weight: 600;
+    z-index: 999;
+    box-shadow: 0 -6px 10px 5px rgba(0,0,0,0.5);
+  }
+
+  .toolbar img {
+    margin: 0 16px;
+  }
+  span{
+    color: white;
+  }
+a{ 
+    color: wihte;
+    text-decoration: none;
+
+  }
+
+  .toolbar #github-logo {
+    height: 40px;
+    margin: 0 8px;
+  }
+
+  .toolbar #linkedin-logo {
+    height: 40px;
+    margin: 0 16px;
+  }
+
+  .toolbar #github-logo:hover,
+  .toolbar #linkedin-logo:hover {
+    opacity: 0.8;
+  }
+
+  
+ 
