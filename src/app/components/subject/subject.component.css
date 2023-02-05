@@ -1,6 +1,8 @@
   .spacer{
     text-align: center;
-    margin-top: 42px;
+    position: absolute;
+    width: 100%;
+    top: 60px;
   }
   p{
     color: red;
@@ -39,14 +41,11 @@
     .table{
       min-height: 85vh;
     }
-    .titleField {
+    .subjectField {
       width: 80vw;
       margin-right: 0;
     }
-    .authorField{
-      width: 80%;
-      margin-left: 0;
-    }  
+    
     .pagination{
       margin: 0;
       margin-right: 1rem;

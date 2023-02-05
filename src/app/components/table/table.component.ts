@@ -1,7 +1,4 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ViewChild} from '@angular/core';
-// import {MatPaginator} from '@angular/material/paginator';
-// import {MatTableDataSource} from '@angular/material/table';
 import { BookService } from 'src/app/services/book.service';
 
 interface data{
@@ -25,7 +22,6 @@ export class TableComponent {
 
   constructor(private bookService: BookService){}
   @Input() searchField: string= '';
-  // @Input() searching: boolean= true;
   searchingCompleted: boolean= false;
   @Output() bookFetched = new EventEmitter<boolean>();
 

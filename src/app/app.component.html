@@ -1,7 +1,11 @@
-<app-header></app-header>
+<app-header (sideNavToggled)="sideNavStatus = $event;" ></app-header>
+<app-size-detector></app-size-detector>
 
-<div class="between">
-  <router-outlet></router-outlet>
-</div>
+<main>
+  <app-sidenav [sideNavStatus]="sideNavStatus" [ngClass]="{'app-side-nav-close': !sideNavStatus}"></app-sidenav>
+  <div class="between">
+    <router-outlet ></router-outlet>
+  </div>
+</main>
 
-<app-footer></app-footer>
+<!-- <app-footer></app-footer> -->

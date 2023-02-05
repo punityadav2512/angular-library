@@ -27,6 +27,8 @@ import {MatSelectModule} from '@angular/material/select';
 import { SubjectComponent } from './components/subject/subject.component';
 import { HomeComponent } from './components/home/home.component';
 import { RocketComponent } from './components/rocket/rocket.component';
+import { SidenavComponent } from './components/sidenav/sidenav.component';
+import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +39,9 @@ import { RocketComponent } from './components/rocket/rocket.component';
     FooterComponent,
     SubjectComponent,
     HomeComponent,
-    RocketComponent
+    RocketComponent,
+    SidenavComponent,
+    SizeDetectorComponent
   ],
   imports: [
     BrowserModule,

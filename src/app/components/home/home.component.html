@@ -1,5 +1,4 @@
-<app-rocket></app-rocket>
-
-<div class="spacer">
-    <app-search></app-search>
-</div>
+    <div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
+        <app-rocket></app-rocket>
+        <app-search></app-search>
+    </div>
