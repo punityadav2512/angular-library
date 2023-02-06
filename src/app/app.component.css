@@ -31,5 +31,5 @@ main{
   .app-side-nav-close{
     position: absolute;
     left: 0;
-    width: 0px;
+    width: 60px;
   }

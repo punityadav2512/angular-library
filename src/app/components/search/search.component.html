@@ -20,12 +20,18 @@
 
 <p *ngIf="searching == 2 && (title.length >= 2 && authorName.length >= 2)">
   {{bookOutput}} Search Results For: {{title}} and {{authorName}}
+  <br>
+  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
 </p>
 <p *ngIf="searching == 2 && (title.length >= 2 && authorName.length == 0)">
   {{bookOutput}} Search Results For: {{title}}
+  <br>
+  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
 </p>
 <p *ngIf="searching == 2 && (title.length == 0 && authorName.length >= 2)">
   {{bookOutput}} Search Results For: {{authorName}}
+  <br>
+  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
 </p>
 
 
@@ -59,7 +65,7 @@
 
 </table>
 
-  <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput" [(page)]="page" [boundaryLinks]="true">
+  <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput < 100? bookOutput: 100" [(page)]="page" [boundaryLinks]="true">
     <ng-template ngbPaginationPages let-page let-pages="pages">
       <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
         <div class="mb-1 d-flex flex-nowrap px-2">
