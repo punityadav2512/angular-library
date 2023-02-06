@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
+import { SCREEN_SIZE } from 'src/app/models/screen-size.enum';
 import { BookService } from 'src/app/services/book.service';
+import { ResizeService } from 'src/app/services/resize.service';
+import { SharedService } from 'src/app/services/shared.service';
 
 
 export interface data{
@@ -14,7 +17,30 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
   styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent {
-  constructor(private bookService: BookService){}
+  sideNavStatus : boolean = true;
+  mobile: any;
+  mediaQuery: any ;
+  constructor(private sharedService: SharedService, private bookService: BookService, private resizeSvc: ResizeService){
+    this.mediaQuery = window.matchMedia('(max-width: 768px)');
+    this.sideNavStatus = this.sharedService.getsideNavValue();
+    // this.sharedService.setsideNavValue(this.sideNavStatus);
+    if(this.mediaQuery.matches) {
+      this.sharedService.setsideNavValue(true);
+      this.mobile = true;
+    }
+
+    this.resizeSvc.onResize$.subscribe(x => {
+      this.mobile = x;
+    });
+
+  }
+
+  ngOnInit(): void {
+    this.sideNavStatus = this.sharedService.getsideNavValue();
+  }
+
+
+
   page = 1;
   pageSize = 10;
   selectPage(page: string) {
@@ -23,8 +49,6 @@ export class SubjectComponent {
   formatInput(input: HTMLInputElement) {
 		input.value = input.value.replace(FILTER_PAG_REGEX, '');
 	}
-  title: string = '';
-  authorName: string = '';
 
   subject: string = '';
   searching: number= 0;
@@ -38,16 +62,15 @@ export class SubjectComponent {
 
   getBook(subject: string){
     this.searching = 1;
-    // this.authorName = authorName?? '';
-    // this.title = title ?? '';
+   
     this.subject = subject?? '';
     this.bookService.getBookBySubject(this.subject).subscribe(
       (data: data) => {
         this.bookOutput = data.numFound;
         this.booksArray = data.docs;
-        console.log(this.booksArray);
         this.searching = 2;
       });
   }
  
+  size: SCREEN_SIZE;
 }

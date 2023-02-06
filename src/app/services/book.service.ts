@@ -12,18 +12,18 @@ export class BookService {
 
   getBookByTitleOrAuthor(title: string, author: string){
     if ((title && title.length >= 2) && (!author || author.length < 2)) {
-      return this.http.get('https://openlibrary.org/search.json?title=' + title);
+      return this.http.get('https://openlibrary.org/search.json?title=' + title + '&limit=100');
     }
     else if ((!title || title.length < 2) && (author && author.length >= 2)) {
-      return this.http.get('https://openlibrary.org/search.json?author=' + author);
+      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&limit=100');
     }
     else {
-      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&title=' + title);
+      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&title=' + title + '&limit=100');
     }
   }
 
   getBookBySubject(subject: string){
-    return this.http.get('https://openlibrary.org/search.json?subject=' + subject);
+    return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=100');
   }
 
 

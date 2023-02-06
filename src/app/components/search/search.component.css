@@ -8,6 +8,10 @@
     color: red;
 
   }
+
+.color{
+  color: blue;
+}
   .pagination{
     margin-right: 4rem;
     margin-top: 3rem;
@@ -41,7 +45,7 @@
   }
   
   .table{
-    width: 90%;
+    width: 80%;
     height: 70vh;
     margin: 2rem auto;
 }
