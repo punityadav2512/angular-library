@@ -12,22 +12,25 @@ export class BookService {
 
   getBookByTitleOrAuthor(title: string, author: string){
     if ((title && title.length >= 2) && (!author || author.length < 2)) {
-      return this.http.get('https://openlibrary.org/search.json?title=' + title + '&limit=100');
+      return this.http.get('https://openlibrary.org/search.json?title=' + title + '&limit=40');
     }
     else if ((!title || title.length < 2) && (author && author.length >= 2)) {
-      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&limit=100');
+      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&limit=40');
     }
     else {
-      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&title=' + title + '&limit=100');
+      return this.http.get('https://openlibrary.org/search.json?author=' + author + '&title=' + title + '&limit=40');
     }
   }
 
   getBookBySubject(subject: string){
-    return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=100');
+    return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=40');
   }
+  // getTopBookSubject(subject: string){
+  //   return this.http.get('https://openlibrary.org/subjects/' + subject + '.json');
+  // }
 
   getTop5Subjects(){
-    return this.http.get(' https://openlibrary.org/search/subjects?q=subjects&mode=everything&limit=5');
+    return this.http.get('https://openlibrary.org/search/subjects.json?q=subjects&mode=everything&limit=5');
   }
 
 

@@ -24,6 +24,7 @@ export class SubjectComponent {
   mobile: any;
   mediaQuery: any ;
   constructor(private sharedService: SharedService, private bookService: BookService, private resizeSvc: ResizeService){
+    this.get5Subjects();
     this.mediaQuery = window.matchMedia('(max-width: 768px)');
     this.sideNavStatus = this.sharedService.getsideNavValue();
     // this.sharedService.setsideNavValue(this.sideNavStatus);
@@ -48,7 +49,7 @@ export class SubjectComponent {
   ngOnInit(): void {
     this.sideNavStatus = this.sharedService.getsideNavValue();
     
-    this.get5Subjects();
+    // this.get5Subjects();
   }
 
 
@@ -63,7 +64,7 @@ export class SubjectComponent {
 	}
 
   subject: string='';
-  searching: number= 0;
+  searching: number =0;
 
   clearSubject() {
     this.subject = '';
@@ -76,7 +77,6 @@ export class SubjectComponent {
     // if(this.stateMap.has(this.subject)){
     //   this.booksArray = this.stateMap.get(this.subject) as Book[];
     // }else{
-
       this.searching = 1;
       this.subject = subject?? '';
       this.bookService.getBookBySubject(this.subject).subscribe(
@@ -86,8 +86,19 @@ export class SubjectComponent {
           this.booksArray = data.docs;
           this.searching = 2;
         });
-      // }
   }
+
+  // getTopBook(subject: string){
+  //   this.searching = 1;
+  //   this.subject = subject?? '';
+  //   this.bookService.getTopBookSubject(this.subject).subscribe(
+  //     (data: data) => {
+  //       // this.stateMap.set(this.subject, data.docs);
+  //       this.bookOutput = data.numFound;
+  //       this.booksArray = data.docs;
+  //       this.searching = 2;
+  //     });
+  // }
  
   size: SCREEN_SIZE;
 }

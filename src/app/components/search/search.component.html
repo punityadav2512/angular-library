@@ -27,7 +27,7 @@
 <p *ngIf="searching == 2 && (title.length == 0 && authorName.length >= 2)">
   {{bookOutput}} Search Results For: {{authorName}}
 </p>
-<span *ngIf="bookOutput> 100" class="color">Results are limited to 100 </span>
+<span *ngIf="bookOutput> 40" class="color">Results are limited to 40 </span>
 
 
 <!-- <div *ngIf="searchField">
@@ -49,18 +49,18 @@
   </thead>
   <tbody>
     <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize">
-      <td>
-        {{ book.title }}
+      <td *ngIf="book?.title">
+        {{ book?.title }}
       </td>
-      <td>{{ book.author_name[0] }}</td>
-      <td>{{ book.publish_year[0] }}</td>
-      <td>{{book.first_publish_year }}</td>
+      <td *ngIf="book?.author">{{ book?.author_name[0] }}</td>
+      <td *ngIf="book?.publish_year">{{ book?.publish_year[0] }}</td>
+      <td *ngIf="book?.first_publish_year">{{book?.first_publish_year }}</td>
     </tr>
   </tbody>
 
 </table>
 
-  <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput < 100? bookOutput: 100" [(page)]="page" [boundaryLinks]="true">
+  <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput < 40? bookOutput: 40" [(page)]="page" [boundaryLinks]="true">
     <ng-template ngbPaginationPages let-page let-pages="pages">
       <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
         <div class="mb-1 d-flex flex-nowrap px-2">
