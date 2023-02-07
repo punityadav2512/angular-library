@@ -8,12 +8,13 @@
 <div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
 
   <!-- <div class="card highlight-card" > -->
-  <mat-card color="primary">
+  <mat-card *ngIf="searching == 0 || searching == 1 || searching == 2">
     <h2 style="color: #FF4986;">Popular Subjects</h2>
     <mat-card-content>
       <span *ngFor="let book of booksArray">
 
-        <a style="margin-left: 2rem;" routerLink="/subject" (click)="getBook(book.name)">{{book.name}}</a>
+        <a style="margin-left: 2rem;" routerLink="/subject"
+          (click)="getBook(book.key.split('/')[2])">{{book.name}}</a>
       </span>
 
     </mat-card-content>
@@ -36,7 +37,7 @@
     <p *ngIf="searching == 2">
       {{bookOutput}} Search Results For: {{subject}}
       <br>
-      <span *ngIf="bookOutput> 100" class="color">Results are limited to 100</span>
+      <span *ngIf="bookOutput> 40" class="color">Results are limited to 40</span>
     </p>
 
 
@@ -59,20 +60,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize">
-          <td>
-            {{ book.title }}
+        <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize"
+        >
+          <td *ngIf="book?.title">
+            {{ book?.title }}
           </td>
-          <td>{{ book.author_name[0] }}</td>
-          <td>{{ book.publish_year[0] }}</td>
-          <td>{{book.first_publish_year }}</td>
+          <td *ngIf="book?.author_name">{{ book.author_name[0]}}</td>
+          <td *ngIf="book?.publish_year">{{ book?.publish_year[0] }}</td>
+          <td *ngIf="book?.first_publish_year">{{book?.first_publish_year}}</td>
         </tr>
       </tbody>
 
     </table>
 
     <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end"
-      [collectionSize]="bookOutput < 100? bookOutput: 100" [(page)]="page" [boundaryLinks]="true">
+      [collectionSize]="bookOutput < 40? bookOutput: 40" [(page)]="page" [boundaryLinks]="true">
       <ng-template ngbPaginationPages let-page let-pages="pages">
         <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
           <div class="mb-1 d-flex flex-nowrap px-2">
