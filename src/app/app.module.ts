@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -8,6 +8,7 @@ import { SearchComponent } from './components/search/search.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TableComponent } from './components/table/table.component';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 
 import { DecimalPipe, NgFor } from '@angular/common';
@@ -29,6 +30,7 @@ import { HomeComponent } from './components/home/home.component';
 import { RocketComponent } from './components/rocket/rocket.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
+import { CacheInterceptor } from './interceptors/cache.interceptor';
 
 @NgModule({
   declarations: [
@@ -62,9 +64,17 @@ import { SizeDetectorComponent } from './components/size-detector/size-detector.
     MatIconModule,
     MatButtonModule,
     MatSidenavModule,
-    MatSelectModule
+    MatSelectModule,
+    MatCardModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CacheInterceptor,
+      multi: true
+
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

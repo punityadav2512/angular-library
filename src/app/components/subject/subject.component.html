@@ -1,7 +1,25 @@
+<svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632"
+  viewBox="0 0 516.119 1083.632">
+  <title>Rocket Ship Smoke</title>
+  <path id="Path_40" data-name="Path 40"
+    d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z"
+    transform="translate(-147.025 -140.939)" fill="#f5f5f5" />
+</svg>
 <div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
 
+  <!-- <div class="card highlight-card" > -->
+  <mat-card color="primary">
+    <h2 style="color: #FF4986;">Popular Subjects</h2>
+    <mat-card-content>
+      <span *ngFor="let book of booksArray">
+
+        <a style="margin-left: 2rem;" routerLink="/subject" (click)="getBook(book.name)">{{book.name}}</a>
+      </span>
+
+    </mat-card-content>
+  </mat-card>
+
   <div class="spacer">
-    
     <mat-form-field class="subjectField">
       <mat-label>Enter Subject</mat-label>
       <input [(ngModel)]="subject" matInput placeholder="Ex. Javascript" autocomplete="off">
@@ -9,20 +27,20 @@
         <mat-icon>close</mat-icon>
       </button>
     </mat-form-field>
-    
+
     <br>
-    
+
     <button mat-raised-button color="accent" (click)="getBook(subject)">Search</button>
     <br><br>
-    
+
     <p *ngIf="searching == 2">
       {{bookOutput}} Search Results For: {{subject}}
       <br>
-      <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
+      <span *ngIf="bookOutput> 100" class="color">Results are limited to 100</span>
     </p>
-    
-    
-    
+
+
+
     <!-- <div *ngIf="searchField">
       <app-table [searchField]='searchField' (bookFetched) = "bookFetched($event)"></app-table>
       
@@ -30,7 +48,7 @@
     <div class="spinner" *ngIf="(subject) && searching == 1">
       <mat-spinner></mat-spinner>
     </div>
-    
+
     <table class="table table-striped" *ngIf="searching == 2">
       <thead>
         <tr>
@@ -50,18 +68,19 @@
           <td>{{book.first_publish_year }}</td>
         </tr>
       </tbody>
-      
+
     </table>
-    
-    <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end" [collectionSize]="bookOutput < 100? bookOutput: 100" [(page)]="page" [boundaryLinks]="true">
+
+    <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end"
+      [collectionSize]="bookOutput < 100? bookOutput: 100" [(page)]="page" [boundaryLinks]="true">
       <ng-template ngbPaginationPages let-page let-pages="pages">
         <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
           <div class="mb-1 d-flex flex-nowrap px-2">
             <label id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
             <input #i type="text" inputmode="numeric" pattern="[0-9]*" class="form-control custom-pages-input"
-            id="paginationInput" [value]="page" (keyup.enter)="selectPage(i.value)" (blur)="selectPage(i.value)"
-            (input)="formatInput($any($event).target)" aria-labelledby="paginationInputLabel paginationDescription"
-            style="width: 3rem" />
+              id="paginationInput" [value]="page" (keyup.enter)="selectPage(i.value)" (blur)="selectPage(i.value)"
+              (input)="formatInput($any($event).target)" aria-labelledby="paginationInputLabel paginationDescription"
+              style="width: 3rem" />
             <span id="paginationDescription" class="col-form-label text-nowrap px-2"> of {{pages.length}}</span>
           </div>
         </li>

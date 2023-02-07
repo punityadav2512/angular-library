@@ -50,7 +50,6 @@ export class SearchComponent {
       (data: data) => {
         this.bookOutput = data.numFound;
         this.booksArray = data.docs;
-        console.log(this.booksArray);
         this.searching = 2;
       });
   }
