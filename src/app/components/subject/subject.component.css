@@ -24,7 +24,7 @@ a:hover{
   left: 250px;
   right: 0;
   padding: 2rem;
-  width: calc(100%- 250px);
+  width: calc(100% - 250px);
   text-align: center;
   scroll-behavior: smooth;
   height: calc(100vh - 60px);
