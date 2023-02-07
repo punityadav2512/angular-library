@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Book } from 'src/app/models/book';
 import { SCREEN_SIZE } from 'src/app/models/screen-size.enum';
 import { BookService } from 'src/app/services/book.service';
 import { ResizeService } from 'src/app/services/resize.service';
@@ -17,6 +18,8 @@ const FILTER_PAG_REGEX = /[^0-9]/g;
   styleUrls: ['./subject.component.css']
 })
 export class SubjectComponent {
+
+  // stateMap = new Map<string, Book[]>();
   sideNavStatus : boolean = true;
   mobile: any;
   mediaQuery: any ;
@@ -34,9 +37,18 @@ export class SubjectComponent {
     });
 
   }
-
+  get5Subjects(){
+    this.bookService.getTop5Subjects().subscribe(
+      (data: any) => {
+        this.booksArray = data.docs;
+        this.bookOutput = data.numFound;
+      } 
+    )
+ }
   ngOnInit(): void {
     this.sideNavStatus = this.sharedService.getsideNavValue();
+    
+    this.get5Subjects();
   }
 
 
@@ -50,7 +62,7 @@ export class SubjectComponent {
 		input.value = input.value.replace(FILTER_PAG_REGEX, '');
 	}
 
-  subject: string = '';
+  subject: string='';
   searching: number= 0;
 
   clearSubject() {
@@ -61,16 +73,22 @@ export class SubjectComponent {
 
 
   getBook(subject: string){
-    this.searching = 1;
-   
-    this.subject = subject?? '';
-    this.bookService.getBookBySubject(this.subject).subscribe(
-      (data: data) => {
-        this.bookOutput = data.numFound;
-        this.booksArray = data.docs;
-        this.searching = 2;
-      });
+    // if(this.stateMap.has(this.subject)){
+    //   this.booksArray = this.stateMap.get(this.subject) as Book[];
+    // }else{
+
+      this.searching = 1;
+      this.subject = subject?? '';
+      this.bookService.getBookBySubject(this.subject).subscribe(
+        (data: data) => {
+          // this.stateMap.set(this.subject, data.docs);
+          this.bookOutput = data.numFound;
+          this.booksArray = data.docs;
+          this.searching = 2;
+        });
+      // }
   }
  
   size: SCREEN_SIZE;
 }
+

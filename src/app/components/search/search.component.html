@@ -20,19 +20,14 @@
 
 <p *ngIf="searching == 2 && (title.length >= 2 && authorName.length >= 2)">
   {{bookOutput}} Search Results For: {{title}} and {{authorName}}
-  <br>
-  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
 </p>
 <p *ngIf="searching == 2 && (title.length >= 2 && authorName.length == 0)">
   {{bookOutput}} Search Results For: {{title}}
-  <br>
-  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
-</p>
+  </p>
 <p *ngIf="searching == 2 && (title.length == 0 && authorName.length >= 2)">
   {{bookOutput}} Search Results For: {{authorName}}
-  <br>
-  <span class="color">Results are limited to {{bookOutput < 100? bookOutput: 100}}.</span>
 </p>
+<span *ngIf="bookOutput> 100" class="color">Results are limited to 100 </span>
 
 
 <!-- <div *ngIf="searchField">

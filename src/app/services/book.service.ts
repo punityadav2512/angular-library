@@ -26,6 +26,10 @@ export class BookService {
     return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=100');
   }
 
+  getTop5Subjects(){
+    return this.http.get(' https://openlibrary.org/search/subjects?q=subjects&mode=everything&limit=5');
+  }
+
 
 
 }
