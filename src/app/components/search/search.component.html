@@ -49,12 +49,12 @@
   </thead>
   <tbody>
     <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize">
-      <td>
+      <td *ngIf="book?.title">
         {{ book?.title }}
       </td>
-      <td>{{ book?.author_name[0] }}</td>
-      <td>{{ book?.publish_year[0] }}</td>
-      <td>{{book?.first_publish_year }}</td>
+      <td *ngIf="book?.author">{{ book?.author_name[0] }}</td>
+      <td *ngIf="book?.publish_year">{{ book?.publish_year[0] }}</td>
+      <td *ngIf="book?.first_publish_year">{{book?.first_publish_year }}</td>
     </tr>
   </tbody>
 
