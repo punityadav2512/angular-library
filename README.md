@@ -1,10 +1,13 @@
 # FyleOpenlibrary
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
+It is completely mobile responsive.
+It includes search by title, search by author, listing of top 5 subjects and search book by subject. 
+It also includes caching(Global Level) to avoid making repetitive calls to the API(open library API).
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+First run `npm install` and then run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
