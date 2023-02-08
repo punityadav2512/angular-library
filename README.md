@@ -3,7 +3,7 @@
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.1.4.
 #### [Live Preview](https://angular-library-eight.vercel.app/)
 It is completely mobile responsive.
-It includes search by title, search by author, listing of top 5 subjects and search book by subject. 
+It includes search by title, search by author, listing of top 5 subjects and search book by subject with pagination and caching. 
 It also includes caching(Global Level) to avoid making repetitive calls to the API(open library API).
 
 ## Usage
