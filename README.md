@@ -6,7 +6,7 @@ It is completely mobile responsive.
 It includes search by title, search by author, listing of top 5 subjects and search book by subject. 
 It also includes caching(Global Level) to avoid making repetitive calls to the API(open library API).
 
-##Usage
+## Usage
 
 1. Clone the repo
    ```sh
