@@ -8,10 +8,10 @@
 <div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
 
   <!-- <div class="card highlight-card" > -->
-  <mat-card *ngIf="searching == 0 || searching == 1 || searching == 2">
+  <mat-card>
     <h2 style="color: #FF4986;">Popular Subjects</h2>
     <mat-card-content>
-      <span *ngFor="let book of booksArray">
+      <span *ngFor="let book of popularSubjects">
 
         <a style="margin-left: 2rem;" routerLink="/subject"
           (click)="getBook(book.key.split('/')[2])">{{book.name}}</a>
@@ -63,11 +63,11 @@
         <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize"
         >
           <td *ngIf="book?.title">
-            {{ book?.title }}
+            {{ book.title }}
           </td>
           <td *ngIf="book?.author_name">{{ book.author_name[0]}}</td>
-          <td *ngIf="book?.publish_year">{{ book?.publish_year[0] }}</td>
-          <td *ngIf="book?.first_publish_year">{{book?.first_publish_year}}</td>
+          <td *ngIf="book?.publish_year">{{ book.publish_year[0] }}</td>
+          <td *ngIf="book?.first_publish_year">{{book.first_publish_year}}</td>
         </tr>
       </tbody>
 

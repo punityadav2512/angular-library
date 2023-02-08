@@ -41,7 +41,7 @@ export class SubjectComponent {
   get5Subjects(){
     this.bookService.getTop5Subjects().subscribe(
       (data: any) => {
-        this.booksArray = data.docs;
+        this.popularSubjects = data.docs;
         this.bookOutput = data.numFound;
       } 
     )
@@ -69,7 +69,8 @@ export class SubjectComponent {
   clearSubject() {
     this.subject = '';
   }
-  bookOutput: number = 0 
+  bookOutput: number = 0 ;
+  popularSubjects = [];
   booksArray: Array<any> = []
 
 
@@ -86,6 +87,7 @@ export class SubjectComponent {
           this.booksArray = data.docs;
           this.searching = 2;
         });
+        this.get5Subjects();
   }
 
   // getTopBook(subject: string){
