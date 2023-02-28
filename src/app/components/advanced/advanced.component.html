@@ -1,0 +1,67 @@
+<svg id="rocket-smoke" xmlns="http://www.w3.org/2000/svg" width="516.119" height="1083.632"
+  viewBox="0 0 516.119 1083.632">
+  <title>Rocket Ship Smoke</title>
+  <path id="Path_40" data-name="Path 40"
+    d="M644.6,141S143.02,215.537,147.049,870.207s342.774,201.755,342.774,201.755S404.659,847.213,388.815,762.2c-27.116-145.51-11.551-384.124,271.9-609.1C671.15,139.365,644.6,141,644.6,141Z"
+    transform="translate(-147.025 -140.939)" fill="#f5f5f5" />
+</svg>
+<div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
+
+  <mat-card>
+    <h2 style="color: #FF4986;">Search Inside a Book</h2>
+    <mat-card-content>
+    </mat-card-content>
+  </mat-card>
+
+  <div class="spacer">
+    <mat-form-field class="subjectField">
+      <mat-label>Type a phrase</mat-label>
+      <input [(ngModel)]="phrase" matInput placeholder="Ex. Thanks for the fish" autocomplete="off">
+      <button mat-button matSuffix (click)="clearPhrase()" *ngIf="phrase">
+        <mat-icon>close</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="accent" (click)="searchInsideBook(phrase)">Search</button>
+    <br><br>
+
+    <p *ngIf="searching == 2">
+      <!-- {{bookOutput}} Search Results For: {{phrase}} -->
+      <!-- <br> -->
+      <span *ngIf="bookOutput> 10" class="color">
+        The best books that match your query are shown.
+      </span>
+    </p>
+
+    <div class="spinner" *ngIf="(phrase) && searching == 1">
+      <mat-spinner></mat-spinner>
+    </div>
+
+    <table class="table table-striped" *ngIf="searching == 2">
+      <thead>
+        <tr>
+          <th scope="col">Title</th>
+          <th scope="col">Author</th>
+          <th scope="col">Link</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let book of booksArray | slice: (page-1) * pageSize : page * pageSize"
+        >
+          <td *ngIf="book?.edition?.title">
+            {{ book.edition.title }}
+          </td>
+          <td *ngIf="book?.edition?.authors[0]?.name">{{ book.edition.authors[0].name}}</td>
+          <td *ngIf="!book?.edition?.authors[0]?.name"></td>
+          <!-- <td *ngIf="book?.publish_year">{{ book.publish_year[0] }}</td> -->
+          <a class="book_link" *ngIf="book?.edition?.key" target="_blank" href="{{'https://openlibrary.org' + book?.edition?.key}}">
+            <td>Open</td>
+          </a>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+</div>
