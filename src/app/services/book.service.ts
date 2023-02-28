@@ -22,8 +22,8 @@ export class BookService {
     }
   }
 
-  getBookBySubject(subject: string){
-    return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=40');
+  getBookBySubject(subject: string, offset: number){
+    return this.http.get('https://openlibrary.org/search.json?subject=' + subject + '&limit=10&offset='+ offset);
   }
   // getTopBookSubject(subject: string){
   //   return this.http.get('https://openlibrary.org/subjects/' + subject + '.json');
@@ -31,6 +31,10 @@ export class BookService {
 
   getTop5Subjects(){
     return this.http.get('https://openlibrary.org/search/subjects.json?q=subjects&mode=everything&limit=5');
+  }
+
+  getBookByPhrase(phrase: string){
+    return this.http.get('https://openlibrary.org/search/inside.json?q=' + phrase + '&limit=10');
   }
 
 

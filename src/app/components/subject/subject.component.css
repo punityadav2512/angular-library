@@ -40,6 +40,33 @@ a:hover{
   margin-top: 3rem;
 }
 
+
+/* .btn-toolbar {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 250px;
+  text-align: center;
+  width: 80%;
+} */
+/* 
+.previous_button {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
+
+.next_button {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+} */
+
+.previous_button{
+  margin-right: 1rem;
+}
+.next_button{
+  margin-left: 1rem;
+}
 .spacer{
     text-align: center;
     position: absolute;

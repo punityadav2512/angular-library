@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { Book } from 'src/app/models/book';
 import { SCREEN_SIZE } from 'src/app/models/screen-size.enum';
 import { BookService } from 'src/app/services/book.service';
 import { ResizeService } from 'src/app/services/resize.service';
@@ -7,19 +6,16 @@ import { SharedService } from 'src/app/services/shared.service';
 
 
 export interface data{
-  numFound: number;
-  docs: Array<any>;
+  total: number;
+  hits: any;
 }
 const FILTER_PAG_REGEX = /[^0-9]/g;
-
 @Component({
-  selector: 'app-subject',
-  templateUrl: './subject.component.html',
-  styleUrls: ['./subject.component.css']
+  selector: 'app-advanced',
+  templateUrl: './advanced.component.html',
+  styleUrls: ['./advanced.component.css']
 })
-export class SubjectComponent {
-
-  // stateMap = new Map<string, Book[]>();
+export class AdvancedComponent {
   sideNavStatus : boolean = true;
   mobile: any;
   mediaQuery: any ;
@@ -37,20 +33,10 @@ export class SubjectComponent {
     });
 
   }
-  get5Subjects(){
-    this.bookService.getTop5Subjects().subscribe(
-      (data: any) => {
-        this.popularSubjects = data.docs;
-        this.bookOutput = data.numFound;
-      } 
-    )
- }
+
   ngOnInit(): void {
     this.sideNavStatus = this.sharedService.getsideNavValue();
-    this.get5Subjects();
   }
-
-
 
   page = 1;
   pageSize = 10;
@@ -61,44 +47,24 @@ export class SubjectComponent {
 		input.value = input.value.replace(FILTER_PAG_REGEX, '');
 	}
 
-  subject: string='';
+  phrase: string='';
   searching: number =0;
-  offset: number = 0;
-  offsetCount : number = 0;
 
-  clearSubject() {
-    this.subject = '';
+  clearPhrase() {
+    this.phrase = '';
   }
   bookOutput: number = 0 ;
   popularSubjects = [];
   booksArray: Array<any> = []
 
 
-  getPreviousResults(){
-    if(this.offsetCount> 0) {
-      this.offsetCount--;
-    }else{
-      this.offsetCount = 0;
-    };
-    this.offset = this.offsetCount * 10;
-    this.getBook(this.subject);
-  }
-  getNextResults(){
-    this.offsetCount++;
-    this.offset = this.offsetCount * 10;
-    this.getBook(this.subject);
-  }
-  getBook(subject: string){
-    // if(this.stateMap.has(this.subject)){
-    //   this.booksArray = this.stateMap.get(this.subject) as Book[];
-    // }else{
+  searchInsideBook(phrase: string){
       this.searching = 1;
-      this.subject = subject?? '';
-      this.bookService.getBookBySubject(this.subject, this.offset).subscribe(
+      this.phrase = phrase?? '';
+      this.bookService.getBookByPhrase(this.phrase).subscribe(
         (data: data) => {
-          // this.stateMap.set(this.subject, data.docs);
-          this.bookOutput = data.numFound;
-          this.booksArray = data.docs;
+          this.bookOutput = data.hits.total;
+          this.booksArray = data.hits.hits;
           console.log(this.booksArray);
           this.searching = 2;
         });
@@ -106,4 +72,3 @@ export class SubjectComponent {
  
   size: SCREEN_SIZE;
 }
-

@@ -30,10 +30,6 @@
 <span *ngIf="bookOutput> 40" class="color">Results are limited to 40 </span>
 
 
-<!-- <div *ngIf="searchField">
-  <app-table [searchField]='searchField' (bookFetched) = "bookFetched($event)"></app-table>
-
-</div> -->
 <div class="spinner" *ngIf="(title || authorName) && searching == 1">
   <mat-spinner></mat-spinner>
 </div>

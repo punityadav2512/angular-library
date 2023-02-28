@@ -7,7 +7,6 @@
 </svg>
 <div class="display-area" [ngClass]="{'display-area-shrink': mobile== 2|| mobile==3 ? !sideNavStatus: sideNavStatus}">
 
-  <!-- <div class="card highlight-card" > -->
   <mat-card>
     <h2 style="color: #FF4986;">Popular Subjects</h2>
     <mat-card-content>
@@ -37,15 +36,9 @@
     <p *ngIf="searching == 2">
       {{bookOutput}} Search Results For: {{subject}}
       <br>
-      <span *ngIf="bookOutput> 40" class="color">Results are limited to 40</span>
+      <span class="color">Page {{offsetCount + 1}}</span>
     </p>
 
-
-
-    <!-- <div *ngIf="searchField">
-      <app-table [searchField]='searchField' (bookFetched) = "bookFetched($event)"></app-table>
-      
-    </div> -->
     <div class="spinner" *ngIf="(subject) && searching == 1">
       <mat-spinner></mat-spinner>
     </div>
@@ -73,20 +66,9 @@
 
     </table>
 
-    <ngb-pagination *ngIf="searching == 2" class="pagination d-flex justify-content-end"
-      [collectionSize]="bookOutput < 40? bookOutput: 40" [(page)]="page" [boundaryLinks]="true">
-      <ng-template ngbPaginationPages let-page let-pages="pages">
-        <li class="ngb-custom-pages-item" *ngIf="pages.length > 0">
-          <div class="mb-1 d-flex flex-nowrap px-2">
-            <label id="paginationInputLabel" for="paginationInput" class="col-form-label me-2 ms-1">Page</label>
-            <input #i type="text" inputmode="numeric" pattern="[0-9]*" class="form-control custom-pages-input"
-              id="paginationInput" [value]="page" (keyup.enter)="selectPage(i.value)" (blur)="selectPage(i.value)"
-              (input)="formatInput($any($event).target)" aria-labelledby="paginationInputLabel paginationDescription"
-              style="width: 3rem" />
-            <span id="paginationDescription" class="col-form-label text-nowrap px-2"> of {{pages.length}}</span>
-          </div>
-        </li>
-      </ng-template>
-    </ngb-pagination>
-  </div>
+      <button class="previous_button" *ngIf="searching==2" mat-raised-button color="accent" (click)="getPreviousResults()">Previous</button>
+
+      <button class="next_button" *ngIf="searching==2" mat-raised-button color="accent" (click)="getNextResults()">Next</button>
+  
+    </div>
 </div>

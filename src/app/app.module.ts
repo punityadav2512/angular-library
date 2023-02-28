@@ -31,6 +31,7 @@ import { RocketComponent } from './components/rocket/rocket.component';
 import { SidenavComponent } from './components/sidenav/sidenav.component';
 import { SizeDetectorComponent } from './components/size-detector/size-detector.component';
 import { CacheInterceptor } from './interceptors/cache.interceptor';
+import { AdvancedComponent } from './components/advanced/advanced.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CacheInterceptor } from './interceptors/cache.interceptor';
     HomeComponent,
     RocketComponent,
     SidenavComponent,
-    SizeDetectorComponent
+    SizeDetectorComponent,
+    AdvancedComponent
   ],
   imports: [
     BrowserModule,
